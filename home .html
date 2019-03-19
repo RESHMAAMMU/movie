@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<link rel="stylesheet" type="text/css" href="home.css">
+</head>
+<body>
+
+	<div id="maindiv">
+		<div class="heading" id="heading">
+			<h4 style="color:white " id="name" ></h4>
+			<input class="search" type="text" value="" onkeyup="searchMovie(this.value)" placeholder="Search movie" title="Type movie name" id="search" name="search">
+		</div>
+		<div id="listdiv">
+			<!-- <div class="moviecard" id=" moviecard"><div><h3>movieObjectListArray[0]["name"]</h3></div><div><h5>movieObjectListArray[0]["rating"]</h5></div></div> -->
+		</div>
+	</div>
+	<script type="text/javascript">
+		
+		var username = window.location.href;
+		var username = new URL(username);
+		var username = username.searchParams.get("username");
+		// alert(x);
+		
+		document.getElementById('name').innerHTML = username;
+		
+		localStorage.setItem("movieObjectList",JSON.stringify([
+			{name: "Niram",rating: 9.5,review :"Niram (English: Colour) is a 1999 Malayalam romantic film directed by Kamal, starring Kunchacko Boban and Shalini in the lead roles. The film is about a special friendship between a boy and girl, Aby (Kunchacko Boban) and Sona (Shalini). The film's music was composed by Vidyasagar.",image: "image/niram.jpg"},
+			{name: "The tiger",rating: 8.5,review :"star Cast:Suresh Gopi, Gopika, Rajmohan Unnithan, Siddique .Suresh Gopi is back as an honest cop who takes on the political mafia single-handedly with his brain and brawn. Once again he does what he is famous for- punch lines, English dialogues, slow-motion walk that exudes menace with a distinctive body and eye language that is inimitable",image: "image/thetiger.jpg"},
+			{name: "Drishyam",rating: 9.5,review :"A man goes to extreme lengths to save his family from punishment after the family commits an accidental crime.Director: Jeethu Joseph Writer: Jeethu Joseph Stars: Mohanlal, Meena, Ansiba .",image: "image/dris.jpg"},
+			{name: "Joseph",rating: 9,review :"Joseph is a 2018 Malayalam-language Indian thriller-drama film directed by M. Padmakumar and written by Shahi Kabir. It stars Joju George, Dileesh Pothan, Irshad, Athmiya, Johny Antony, Sudhi Koppa, Malavika Menon, and Madhuri Braganza.",image: "image/joseph.jpg"},
+			{name: "Old is gold",rating: 7,review :"Story: Song and dance troupe Old is Gold performs at wedding parties and other functions. The blind lead singer falls into a bling girl. Romance begins to bloom, but the girl belongs to a rich family, leading to complexities in their love life",image: "image/oldisgold.jpg"},
+			{name: "June",rating: 8,review :"The film follows the life story of a girl named June from 16 years of her age until she turned 26, thereby giving an insight into those ten years of her life.",image: "image/june.jpg"},
+			{name: "Anandam",rating: 8.2,review :"Aanandam is a 2016 Indian Malayalam-language romantic comedy film written and directed by Ganesh Raj in his directorial debut.Vineeth Sreenivasan produced the film through the banner Habit Of Life, with Vinod Shornur of Cast N Crew as co-producer.Aanandam follows the life of seven sophomore engineering students as they embark on their very first college tour.The film features Arun Kurian, Thomas Mathew, Siddhi Mahajankatti, Roshan Mathew, Annu Antony, Vishak Nair and Anarkali Marikar in the lead roles.Shooting locations were at Goa, Hampi, Kochi, Mysore, and at Amal Jyothi College of Engineering. It was released in theatres on 21 October 2016 and was blockbuster in box office. This movie was subsequently dubbed into Telugu as Aanandam in 2018 by Sukhibava movies..",image: "image/anandam.jpg"},
+			{name: "Vimanam",rating: 7.2,review :"Venkidi, an aeronautics enthusiast with hearing disabilities, faces many struggles as he attempts to build an aircraft using recycled materials.",image: "image/vimanam.jpg"}]));
+		
+		var movieObjectListArray = JSON.parse(localStorage.getItem("movieObjectList"));
+		// alert(movieObjectListArray[0]["name"]);
+
+		
+		var divContent = "";
+		// alert(movieObjectListArray.length);
+		
+		for(var i = 0 ; i< movieObjectListArray.length; i++){
+			divContent = divContent + 
+						'<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '">\
+							<div id="imageDiv"><img src="' + movieObjectListArray[i]["image"] + '">\
+							</div>\
+							<div >\
+								<h3 class="movieNameAndRating">' + movieObjectListArray[i]["name"] + 
+								'</h3>\
+							</div>\
+							<div>\
+									<h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10\
+									</h5>\
+							</div>\
+						</div>';
+		}
+		
+		document.getElementById('listdiv').innerHTML = divContent;
+		
+		function review(i){
+			var movieName = movieObjectListArray[i]["name"];
+			var review = movieObjectListArray[i]["review"];
+			window.location.href = "review.html?movieName="+movieName+"&review="+review+"&username="+username;
+		}
+
+		
+			var divContent = "";
+			for(var i = 0 ; i< movieObjectListArray.length; i++){
+			divContent = divContent + '<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '"><div id="imageDiv"><img class="img" src="' + movieObjectListArray[i]["image"] + '"></div><div><h3 class="movieNameAndRating">' + movieObjectListArray[i]["name"] + '</h3></div><div><h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10</h5></div></div>';
+			}
+			document.getElementById('listdiv').innerHTML = divContent;
+
+			
+			var SearchString = "";
+
+			function searchMovie(SearchString){
+
+
+				var divContent = "";
+				
+				// console.log(SearchString);
+				for (var i = 0; i < movieObjectListArray.length; i++) {
+					var movie = movieObjectListArray[i]["name"];
+					if (movie.search(SearchString) > -1) {
+
+						divContent = divContent + 
+						'<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '">\
+							<div id="imageDiv"><img class="img" src="' + movieObjectListArray[i]["image"] + '">\
+							</div>\
+							<div >\
+								<h3 class="movieNameAndRating">' + movieObjectListArray[i]["name"] + 
+								'</h3>\
+							</div>\
+							<div>\
+									<h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10\
+									</h5>\
+							</div>\
+						</div>';
+					}
+				}
+			
+					document.getElementById('listdiv').innerHTML = divContent;
+				}
+	</script>
+</body>
+</html>
