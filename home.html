@@ -39,7 +39,8 @@
 		var divContent = "";
 		// alert(movieObjectListArray.length);
 		
-		for(var i = 0 ; i< movieObjectListArray.length; i++){
+		for(var i = 0 ; i< movieObjectListArray.length; i++)
+		{
 			divContent = divContent + 
 						'<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '">\
 							<div id="imageDiv"><img src="' + movieObjectListArray[i]["image"] + '">\
@@ -49,40 +50,42 @@
 								'</h3>\
 							</div>\
 							<div>\
-									<h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10\
-									</h5>\
+								<h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10\
+								</h5>\
 							</div>\
 						</div>';
 		}
 		
 		document.getElementById('listdiv').innerHTML = divContent;
 		
-		function review(i){
+		function review(i)
+		{
 			var movieName = movieObjectListArray[i]["name"];
 			var review = movieObjectListArray[i]["review"];
 			window.location.href = "review.html?movieName="+movieName+"&review="+review+"&username="+username;
 		}
 
 		
-			var divContent = "";
-			for(var i = 0 ; i< movieObjectListArray.length; i++){
+		var divContent = "";
+		for(var i = 0 ; i< movieObjectListArray.length; i++)
+		{
 			divContent = divContent + '<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '"><div id="imageDiv"><img class="img" src="' + movieObjectListArray[i]["image"] + '"></div><div><h3 class="movieNameAndRating">' + movieObjectListArray[i]["name"] + '</h3></div><div><h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10</h5></div></div>';
-			}
-			document.getElementById('listdiv').innerHTML = divContent;
+		}
+		document.getElementById('listdiv').innerHTML = divContent;
+		
+		var SearchString = "";
 
-			
-			var SearchString = "";
+		function searchMovie(SearchString)
+		{
 
-			function searchMovie(SearchString){
-
-
-				var divContent = "";
+			var divContent = "";
 				
 				// console.log(SearchString);
-				for (var i = 0; i < movieObjectListArray.length; i++) {
-					var movie = movieObjectListArray[i]["name"];
-					if (movie.search(SearchString) > -1) {
-
+			for (var i = 0; i < movieObjectListArray.length; i++)
+			{
+				var movie = movieObjectListArray[i]["name"];
+				if (movie.search(SearchString) > -1)
+					{
 						divContent = divContent + 
 						'<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '">\
 							<div id="imageDiv"><img class="img" src="' + movieObjectListArray[i]["image"] + '">\
@@ -92,15 +95,15 @@
 								'</h3>\
 							</div>\
 							<div>\
-									<h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10\
-									</h5>\
+								<h5 class="movieNameAndRating">' + movieObjectListArray[i]["rating"] + '/10\
+								</h5>\
 							</div>\
 						</div>';
 					}
-				}
+			}
 			
 					document.getElementById('listdiv').innerHTML = divContent;
-				}
+		}
 	</script>
 </body>
 </html>
